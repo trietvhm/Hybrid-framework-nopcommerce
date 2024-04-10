@@ -2,7 +2,6 @@ package com.nopcommerce.account;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -11,7 +10,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Account_01_Register {
+// Class nay dang vi pham nguyen tac DRY: Don't repeat yourselves
+
+public class Level_01_DRY {
     WebDriver driver;
     //String projectPath = System.getProperty("user.dir");
 
