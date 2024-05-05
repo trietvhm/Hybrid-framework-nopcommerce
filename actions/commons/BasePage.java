@@ -20,7 +20,7 @@ public class BasePage {
         return new BasePage();
     }*/
 
-    /*  Web Browser */
+    /*  Web Browser */  
     public void openPageUrl(WebDriver driver, String pageUrl) {
         driver.get(pageUrl);
     }
@@ -53,9 +53,6 @@ public class BasePage {
         return new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.alertIsPresent());
     }
 
-    public void acceptToAlert(WebDriver driver) {
-        waitForAlertPresence(driver).accept();
-    }
 
     public void cancelToAlert(WebDriver driver) {
         waitForAlertPresence(driver).dismiss();
@@ -122,7 +119,6 @@ public class BasePage {
     public void deleteAllCookies(WebDriver driver) {
         driver.manage().deleteAllCookies();
     }
-
 
     /* Web Element */
 

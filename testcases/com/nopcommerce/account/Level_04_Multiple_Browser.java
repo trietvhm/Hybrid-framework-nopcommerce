@@ -1,11 +1,14 @@
 package com.nopcommerce.account;
 
-import commons.BasePage;
+import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pageObjects.CustomerPageObject;
 import pageObjects.HomePageObject;
@@ -15,7 +18,7 @@ import pageObjects.RegisterPageObject;
 import java.time.Duration;
 import java.util.Random;
 
-public class Level_03_PageObject{
+public class Level_04_Multiple_Browser extends BaseTest {
     private WebDriver driver;
     private String projectPath = System.getProperty("user.dir");
     private HomePageObject homePage;
@@ -24,22 +27,18 @@ public class Level_03_PageObject{
     private CustomerPageObject customerPage;
     private String emailAddress = getEmailRandom();
 
+    @Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
-        System.setProperty("user.dir", projectPath + "\\browserDriver\\geckodriver.exe");
-        driver = new FirefoxDriver();
-        //openPageUrl(driver, "https://demo.nopcommerce.com/");
-        driver.get("https://demo.nopcommerce.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.manage().window().maximize();
-
-        // mở 1 url ra nó ở page nào thì mình khởi tạo page đó lên  ===>> new nó len
-        // tu page nay chuyen qua page kia thì ta cần khởi tạo page đó lên
-        homePage = new HomePageObject(driver);
+    public void beforeClass(String browserName) {
+        driver = getBrowserDriver(browserName);
     }
 
     @Test
     public void User_01_Register_Empty_Data() throws InterruptedException {
+        // mở 1 url ra nó ở page nào thì mình khởi tạo page đó lên  ===>> new nó len
+        // tu page nay chuyen qua page kia thì ta cần khởi tạo page đó lên
+        homePage = new HomePageObject(driver);
+
         homePage.clickToRegisterLink();
 
         // Tu HomePage click vào registerLink nó sẽ mở ra trang Register page
@@ -191,13 +190,6 @@ public class Level_03_PageObject{
     @AfterClass
     public void afterClass() {
         // driver.quit();
-    }
-
-    public String getEmailRandom() {
-        Random rand = new Random();
-        /*String emailAddress = "automation" + rand.nextInt(9999) + "@gmail.net";
-        return emailAddress;*/
-        return "automation" + rand.nextInt(9999) + "@gmail.net";
     }
 
 }
